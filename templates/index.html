@@ -1,0 +1,41 @@
+{{define "index"}}
+
+{{template "header"}}
+  <main class="px-3">
+    <h1>Resume.</h1>
+    <p class="lead">Информация:</p>
+    <br>
+    <p class="lead">пользователь: {{.Name}}</p>
+    <p class="lead">возраст: {{.Age}}</p>
+    <p class="lead">счет: {{.Money}}</p>
+
+    <p class="lead">
+      <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
+    </p>
+  </main>
+  <!-- Вывод по условию -->
+  {{if eq .name "Vasia"}}  <!-- eq - равно,  ne - not equal, lt - lower then, gt - greater then-->
+  <span> YYou, hello!</span>
+  {{else}}
+  <span>Не знаю такого!</span>
+  {{end}}
+
+  <!--  Вывод в цикле ... -->
+  <p class="lead"> Хобби:</p>
+  <ul>
+    {{range .Hobbies}}
+    <li>
+      <b>
+        {{ . }}
+      </b>
+    </li>
+    {{end}}
+  </ul>
+
+{{template "footer"}}
+{{end}}
+
+</div>
+<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

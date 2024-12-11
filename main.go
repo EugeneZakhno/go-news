@@ -2,11 +2,8 @@ package main
 
 import (
 	"fmt"
-	_ "fmt"
 	"html/template"
-	_ "html/template"
 	"net/http"
-	_ "net/http"
 )
 
 func main() {
@@ -14,12 +11,13 @@ func main() {
 }
 
 func handleFunc() {
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 	http.HandleFunc("/", index)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8081", nil)
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("templates/index.html")
+	t, err := template.ParseFiles("templates/index.html", "templates/header.html", "templates/footer.html")
 	if err != nil {
 		fmt.Fprint(w, err.Error())
 	}
