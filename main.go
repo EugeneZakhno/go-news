@@ -13,13 +13,22 @@ func main() {
 func handleFunc() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 	http.HandleFunc("/", index)
-	http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		return
+	}
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("templates/index.html", "templates/header.html", "templates/footer.html")
 	if err != nil {
-		fmt.Fprint(w, err.Error())
+		_, err := fmt.Fprint(w, err.Error())
+		if err != nil {
+			return
+		}
 	}
-	t.ExecuteTemplate(w, "index", nil)
+	err = t.ExecuteTemplate(w, "index", nil)
+	if err != nil {
+		return
+	}
 }
