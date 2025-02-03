@@ -1,26 +1,23 @@
-<!DOCTYPE html>
 {{define "index"}}
 {{template "header"}}
-  <main class="px-3">
-    <h1>Resume.</h1>
-    <p class="lead">Информация:</p>
-    <br>
-    <p class="lead">пользователь: {{.Name}}</p>
-    <p class="lead">возраст: {{.Age}}</p>
-    <p class="lead">счет: {{.Money}}</p>
 
-    <p class="lead">
-      <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
-    </p>
-  </main>
-  <!-- Вывод по условию -->
-  {{if eq .name "Vasia"}}  <!-- eq - равно,  ne - not equal, lt - lower then, gt - greater then-->
+
+<main role="main" class="inner cover">
+  <h1 class="cover-heading">Главная страница</h1>
+  <p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+  <p class="lead">
+    <a href="#" class="btn btn-lg btn-secondary">Узнать больше</a>
+  </p>
+</main>
+  <!-- Вывод по условию
+  {{if eq .name "Vasia"}}   eq - равно,  ne - not equal, lt - lower then, gt - greater then
   <span> YYou, hello!</span>
   {{else}}
   <span>Не знаю такого!</span>
   {{end}}
-
-  <!--  Вывод в цикле ... -->
+-->
+  <!--  Вывод в цикле ...
   <p class="lead"> Хобби:</p>
   <ul>
     {{range .Hobbies}}
@@ -30,7 +27,7 @@
       </b>
     </li>
     {{end}}
-  </ul>
+  </ul> -->
 
 {{template "footer"}}
 {{end}}

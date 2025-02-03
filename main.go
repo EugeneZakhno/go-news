@@ -14,19 +14,25 @@ func index(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	err = t.ExecuteTemplate(w, "index", nil)
+	t.ExecuteTemplate(w, "index", nil)
+}
+
+func create(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("templates/create.html", "templates/header.html", "templates/footer.html")
 	if err != nil {
-		return
+		_, err := fmt.Fprint(w, err.Error())
+		if err != nil {
+			return
+		}
 	}
+	t.ExecuteTemplate(w, "create", nil)
 }
 
 func handleFunc() {
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
+	http.Handle("./static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 	http.HandleFunc("/", index)
-	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
-		return
-	}
+	http.HandleFunc("/create", create)
+	http.ListenAndServe(":8080", nil)
 }
 
 func main() {
