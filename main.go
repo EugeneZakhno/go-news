@@ -21,6 +21,7 @@ func create(w http.ResponseWriter, r *http.Request) {
 }
 
 var posts = []Article{}
+var showPosts = []Article{}
 
 func index(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("templates/index.html", "templates/header.html", "templates/footer.html")
@@ -37,7 +38,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	posts = []Article{}
+	//posts = []Article{}
 	for res.Next() {
 		var post Article
 		err = res.Scan(&post.Id, &post.Title, &post.Anons, &post.FullText)
@@ -75,11 +76,19 @@ func saveArticle(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 }
+func showPost(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	db, err := sql.Open("postgres", "postgresql://godbtest_user:lUDEQDsf2MrpRu80RajTBSOG70RNBcY4@dpg-cu74g1q3esus73fg1beg-a.oregon-postgres.render.com/godbtest_21mb")
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+	fmt.Println(vars)
+}
 
 func handleFunc() {
 
 	rtr := mux.NewRouter()
-
 	rtr.HandleFunc("/", index).Methods("GET")
 	rtr.HandleFunc("/create", create).Methods("GET")
 	rtr.HandleFunc("/save_article", saveArticle).Methods("POST")
