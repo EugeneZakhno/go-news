@@ -6,32 +6,27 @@ import (
 	"net/http"
 )
 
+func create(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("templates/create.html", "templates/header.html", "templates/footer.html")
+	t.ExecuteTemplate(w, "create", nil)
+}
 func index(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("templates/index.html", "templates/header.html", "templates/footer.html")
-	if err != nil {
-		_, err := fmt.Fprint(w, err.Error())
-		if err != nil {
-			return
-		}
-	}
+	t, _ := template.ParseFiles("templates/index.html", "templates/header.html", "templates/footer.html")
 	t.ExecuteTemplate(w, "index", nil)
 }
 
-func create(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("templates/create.html", "templates/header.html", "templates/footer.html")
-	if err != nil {
-		_, err := fmt.Fprint(w, err.Error())
-		if err != nil {
-			return
-		}
-	}
-	t.ExecuteTemplate(w, "create", nil)
+func saveArticle(w http.ResponseWriter, r *http.Request) {
+	title := r.FormValue("title")
+	anons := r.FormValue("anons")
+	fullText := r.FormValue("title")
+	fmt.Println(title, anons, fullText)
 }
 
 func handleFunc() {
 	http.Handle("./static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 	http.HandleFunc("/", index)
 	http.HandleFunc("/create", create)
+	http.HandleFunc("/save_article", saveArticle)
 	http.ListenAndServe(":8080", nil)
 }
 
