@@ -24,7 +24,7 @@ var posts = []Article{}
 var showPosts = []Article{}
 
 func index(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("templates/index.html", "templates/header.html", "templates/footer.html")
+	t := template.Must(template.ParseFiles("templates/index.html", "templates/header.html", "templates/footer.html"))
 
 	db, err := sql.Open("postgres", "postgresql://godbtest_user:lUDEQDsf2MrpRu80RajTBSOG70RNBcY4@dpg-cu74g1q3esus73fg1beg-a.oregon-postgres.render.com/godbtest_21mb")
 	if err != nil {

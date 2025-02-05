@@ -1,11 +1,10 @@
-<!DOCTYPE html>
 {{define "index"}}
-<html lang="en">
-<body>
+
 {{template "header"}}
+
+<html lang="en">
 <main role="main" class="inner cover">
     <h1 class="cover-heading">Главная страница</h1>
-
     <p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
         industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
         it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
@@ -13,7 +12,7 @@
         containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
         versions of Lorem Ipsum.</p>
 
-     {{ range . }}  <!-- вывести вю информацию -->
+     {{ range . }}  <!-- вывести вю информацию  цикл-->
     <div class="alert alert-danger">
         <h2>{{ .Title }}</h2>
         <p>{{.Anons }}</p>
@@ -22,32 +21,11 @@
     {{ else }}
     <p class="lead">Статей нет!</p>
     {{ end }}
-
-
     <p class="lead">
         <a href="#" class="btn btn-lg btn-secondary">Узнать больше</a>
     </p>
 </main>
-{{ template "footer"}}
-{{end}}
 
-<!-- Вывод по условию
-{{if eq .name "Vasia"}}   eq - равно,  ne - not equal, lt - lower then, gt - greater then
-<span> YYou, hello!</span>
-{{else}}
-<span>Не знаю такого!</span>
+{{template "footer"}}
+
 {{end}}
--->
-<!--  Вывод в цикле ...
-<p class="lead"> Хобби:</p>
-<ul>
-  {{range .Hobbies}}
-  <li>
-    <b>
-      {{ . }}
-    </b>
-  </li>
-  {{end}}
-</ul> -->
-</body>
-</html>

@@ -1,3 +1,7 @@
 dody{
-    background: red;
+    background-color: red !important;
+}
+
+html{
+    background-color: red !important;
 }
