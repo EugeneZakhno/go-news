@@ -49,7 +49,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 		fmt.Println(fmt.Sprintf("Post: %s with id %d", post.Title, post.Id))
 	}
-	t.ExecuteTemplate(w, "index", nil)
+	t.ExecuteTemplate(w, "index", posts)
 
 }
 
@@ -84,6 +84,22 @@ func showPost(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 	fmt.Println(vars)
+	// выборка данных
+
+	//// Выборка данных
+	//res, err := db.Query("SELECT * FROM articles")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//for res.Next() {
+	//	var user User
+	//	err res. Scan(&user.Name, &user.Age)
+	//	if err != nil {
+	//		panic(err)
+	//	}
+	//	fmt.Println(fmt.Sprintf("User: %s with age %d", user. Name, user.Age))
+	//}
+	//t.ExecuteTemplate(w, "index", nil)
 }
 
 func handleFunc() {

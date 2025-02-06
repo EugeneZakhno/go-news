@@ -2,7 +2,6 @@
 
 {{template "header"}}
 
-<html lang="en">
 <main role="main" class="inner cover">
     <h1 class="cover-heading">Главная страница</h1>
     <p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -11,11 +10,11 @@
         typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
         containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
         versions of Lorem Ipsum.</p>
-    {{ . }}
+
     {{ range . }}  <!-- вывести вю информацию  цикл-->
     <div class="alert alert-danger">
         <h2>{{ .Title }}</h2>
-        <p>{{.Anons }}</p>
+        <p>{{ .Anons }}</p>
         <a href="/post/{{ .Id }}" class="btn btn-danger">Читать далее</a>
     </div>
     {{ else }}
