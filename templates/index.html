@@ -11,8 +11,8 @@
         typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
         containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
         versions of Lorem Ipsum.</p>
-
-     {{ range . }}  <!-- вывести вю информацию  цикл-->
+    {{ . }}
+    {{ range . }}  <!-- вывести вю информацию  цикл-->
     <div class="alert alert-danger">
         <h2>{{ .Title }}</h2>
         <p>{{.Anons }}</p>
