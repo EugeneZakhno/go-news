@@ -20,7 +20,7 @@ func create(w http.ResponseWriter, r *http.Request) {
 }
 
 var posts = []Article{}
-var showPosts = []Article{}
+var showPosts = Article{}
 
 func index(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(template.ParseFiles("templates/index.html", "templates/header.html", "templates/footer.html"))
@@ -77,11 +77,9 @@ func saveArticle(w http.ResponseWriter, r *http.Request) {
 }
 func showPost(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	t, err := template.Must(template.ParseFiles("templates/show.html", "templates/header.html", "templates/footer.html"))
-	if err != nil {
-		fmt.Fprintf(w, err.Error())
-	}
+	//fmt.Fprintf(w, "ID: %v\n", vars["id"])
 
+	t := template.Must(template.ParseFiles("templates/show.html", "templates/header.html", "templates/footer.html"))
 	db, err := sql.Open("postgres", "postgresql://godbtest_user:lUDEQDsf2MrpRu80RajTBSOG70RNBcY4@dpg-cu74g1q3esus73fg1beg-a.oregon-postgres.render.com/godbtest_21mb")
 	if err != nil {
 		panic(err)
@@ -91,19 +89,21 @@ func showPost(w http.ResponseWriter, r *http.Request) {
 	// выборка данных
 
 	//// Выборка данных
-	//res, err := db.Query("SELECT * FROM articles")
-	//if err != nil {
-	//	panic(err)
-	//}
-	//for res.Next() {
-	//	var user User
-	//	err res. Scan(&user.Name, &user.Age)
-	//	if err != nil {
-	//		panic(err)
-	//	}
-	//	fmt.Println(fmt.Sprintf("User: %s with age %d", user. Name, user.Age))
-	//}
-	//t.ExecuteTemplate(w, "index", nil)
+	res, err := db.Query(fmt.Sprintf("SELECT * FROM articles WHERE id = %s", vars["id"]))
+	if err != nil {
+		panic(err)
+	}
+	showPosts = Article{}
+
+	for res.Next() {
+		var post Article
+		err = res.Scan(&post.Id, &post.Title, &post.Anons, &post.FullText)
+		if err != nil {
+			panic(err)
+		}
+		showPosts = post
+	}
+	t.ExecuteTemplate(w, "show", showPosts)
 }
 
 func handleFunc() {
@@ -112,7 +112,7 @@ func handleFunc() {
 	rtr.HandleFunc("/", index).Methods("GET")
 	rtr.HandleFunc("/create", create).Methods("GET")
 	rtr.HandleFunc("/save_article", saveArticle).Methods("POST")
-	rtr.HandleFunc("/post/{id:[0-9]+}", create).Methods("GET")
+	rtr.HandleFunc("/post/{id:[0-9]+}", showPost).Methods("GET", "POST")
 
 	http.Handle("/", rtr)
 	http.Handle("./static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
