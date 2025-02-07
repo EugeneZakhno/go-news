@@ -37,7 +37,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	//posts = []Article{}
+	posts = []Article{}
 	for res.Next() {
 		var post Article
 		err = res.Scan(&post.Id, &post.Title, &post.Anons, &post.FullText)
@@ -77,6 +77,11 @@ func saveArticle(w http.ResponseWriter, r *http.Request) {
 }
 func showPost(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
+	t, err := template.Must(template.ParseFiles("templates/show.html", "templates/header.html", "templates/footer.html"))
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
+	}
+
 	db, err := sql.Open("postgres", "postgresql://godbtest_user:lUDEQDsf2MrpRu80RajTBSOG70RNBcY4@dpg-cu74g1q3esus73fg1beg-a.oregon-postgres.render.com/godbtest_21mb")
 	if err != nil {
 		panic(err)
