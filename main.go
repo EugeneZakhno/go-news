@@ -85,7 +85,6 @@ func showPost(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	defer db.Close()
-	fmt.Println(vars)
 	// выборка данных
 
 	//// Выборка данных
@@ -106,6 +105,18 @@ func showPost(w http.ResponseWriter, r *http.Request) {
 	t.ExecuteTemplate(w, "show", showPosts)
 }
 
+// TODO: Написать функцию удаления статьи
+func deleteTask(w http.ResponseWriter, r *http.Request) {
+	db, err := sql.Open("postgres", "postgresql://godbtest_user:lUDEQDsf2MrpRu80RajTBSOG70RNBcY4@dpg-cu74g1q3esus73fg1beg-a.oregon-postgres.render.com/godbtest_21mb")
+	id := r.URL.Query().Get("id")
+	_, err = db.Exec("DELETE FROM tasks WHERE id=$1", id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusNoContent)
+}
 func handleFunc() {
 
 	rtr := mux.NewRouter()

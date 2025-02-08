@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="godbtest_21mb@dpg-cu74g1q3esus73fg1beg-a.oregon-postgres.render.com" uuid="eb2e29f6-3772-43b2-a259-f24399bf061e">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <remarks>expire on February 19, 2025</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://dpg-cu74g1q3esus73fg1beg-a.oregon-postgres.render.com:5432/godbtest_21mb</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
