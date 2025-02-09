@@ -2,7 +2,7 @@
 
 {{template "header"}}
 
-<main role="main" class="inner cover">
+<main role="main" class="inner cover" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <h1 class="cover-heading">Главная страница</h1>
     <p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
         industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
@@ -10,6 +10,9 @@
         typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
         containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
         versions of Lorem Ipsum.</p>
+
+    <div class="blue-triangle">Я здесь.</div>
+
 
     {{ range . }}  <!-- вывести вю информацию  цикл-->
     <div class="alert alert-danger">

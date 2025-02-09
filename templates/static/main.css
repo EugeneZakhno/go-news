@@ -5,3 +5,11 @@ dody{
 html{
     background: red !important;
 }
+
+div.blue-triangle{
+    width: 0;
+    height: 0;
+    border-style: solid !important;
+    border-width: 29.5px 0 29.5px 54px;
+    border-color: transparent transparent transparent #339af0;
+}
