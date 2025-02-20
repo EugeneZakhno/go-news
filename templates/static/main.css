@@ -1,12 +1,7 @@
 dody{
     background: red !important;
 }
-
-html{
-    background: red !important;
-}
-
-div.blue-triangle{
+.blue-triangle{
     width: 0;
     height: 0;
     border-style: solid !important;
